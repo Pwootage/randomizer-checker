@@ -52,10 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="data\prime1\Prime1Items.cs" />
+    <Compile Include="data\prime1\Prime1Tricks.cs" />
+    <Compile Include="data\Items.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="data\ItemLocations.cs" />
+    <Compile Include="data\prime1\Prime1ItemLocations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="model.cs" />
-    <Compile Include="Rooms.cs" />
+    <Compile Include="data\prime1\Prime1Rooms.cs" />
+    <Compile Include="data\Rooms.cs" />
     <Compile Include="StringExtractor.cs" />
   </ItemGroup>
   <ItemGroup>

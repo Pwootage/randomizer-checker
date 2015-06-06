@@ -16,32 +16,40 @@ namespace randomizer_checker.model {
             this.zone = zone;
         }
 
-        public void addExit(Exit exit) {
+        public Room addExit(Exit exit) {
             this.exits.Add(exit);
+            return this;
         }
 
-        public void addItem(ItemLocation loc) {
+        public Room addItem(ItemLocation loc) {
             this.items.Add(loc);
+            return this;
         }
     }
 
     class ItemLocation {
+        public string name;
+        public List<List<Trick>> entryMethods;
+        public List<List<Trick>> exitMethods;
+
         public ItemLocation(string name) {
             this.name = name;
-            this.entryMethods = new List<Trick>();
-            this.exitMethods = new List<Trick>();
+            this.entryMethods = new List<List<Trick>>();
+            this.exitMethods = new List<List<Trick>>();
         }
 
-        public string name;
-        public List<Trick> entryMethods;
-        public List<Trick> exitMethods;
-
-        public void addEntry(Trick trick) {
-            this.entryMethods.Add(trick);
+        public ItemLocation addEntry(params Trick[] tricks) {
+            this.entryMethods.Add(new List<Trick>(tricks));
+            return this;
         }
 
-        public void addExit(Trick trick) {
-            this.exitMethods.Add(trick);
+        public ItemLocation addExit(params Trick[] tricks) {
+            this.exitMethods.Add(new List<Trick>(tricks));
+            return this;
+        }
+
+        public override string ToString() {
+            return "ItemLocation[" + name + ", [" + String.Join(",", entryMethods) + "], [" + String.Join(",", exitMethods) + "]]";
         }
     }
 
@@ -50,20 +58,36 @@ namespace randomizer_checker.model {
             this.name = name;
         }
         public string name;
+        public int count;
+
+        public Item setCount(int count) {
+            this.count = count;
+            return this;
+        }
+
+        public override string ToString() {
+            return "Item[" + name + "]";
+        }
     }
 
     class Exit {
-        public string name;
-        /// <summary>
-        /// Trick required to use this "exit"
-        /// </summary>
         public Room dest;
-        public Trick trick;
+        public List<Trick> tricks;
 
-        public Exit(string name, Room dest, Trick trick) {
-            this.name = name;
+        public Exit(Room dest, params Trick[] tricks) {
             this.dest = dest;
-            this.trick = trick;
+            this.tricks = new List<Trick>();
+            foreach (Trick t in tricks)
+                this.tricks.Add(t);
+        }
+
+        public Exit addTrick(Trick trick) {
+            tricks.Add(trick);
+            return this;
+        }
+
+        public override string ToString() {
+            return "Exit[" + dest.name + ", [" + String.Join(",", tricks) + "]]";
         }
     }
 
@@ -77,14 +101,36 @@ namespace randomizer_checker.model {
         /// Description of trick in question (how to perform, where to perform, etc)
         /// </summary>
         public string desc;
-        /// <summary>
-        /// Difficulty rating for this instance of this type of trick; 1-100.
-        /// </summary>
-        public int difficulty;
+        public List<Item> requiredItems;
+        public List<Item> disallowedItems;
 
-        public Trick(string name, int difficulty) {
+        public Trick(string name) {
             this.name = name;
-            this.difficulty = difficulty;
+            this.requiredItems = new List<Item>();
+        }
+
+        public Trick setDesc(string desc) {
+            this.desc = desc;
+            return this;
+        }
+
+        public Trick setUrl(string url) {
+            this.docUrl = url;
+            return this;
+        }
+
+        public Trick addRequiredItem(Item item) {
+            this.requiredItems.Add(item);
+            return this;
+        }
+
+        public Trick addDisallowedItem(Item item) {
+            this.requiredItems.Add(item);
+            return this;
+        }
+
+        public override string ToString() {
+            return "Trick[" + name + "]";
         }
     }
 }
