@@ -64,8 +64,6 @@ namespace randomizer_checker {
         public Dictionary<String, Room> rooms = new Dictionary<string, Room>();
 
         public Rooms() {
-            //THE MOTHER OF ALL INITIALIZERS
-
             //Tallon's Rooms
             add(TallonOverworld, LandingSite);
             add(TallonOverworld, Alcove);
