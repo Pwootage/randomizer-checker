@@ -75,6 +75,8 @@ namespace randomizer_checker.data.prime1 {
             rooms.get(Prime1Rooms.TallonOverworld, Prime1Rooms.LifeGrove)
                 .addItem(get(LifeGroveStart))
                 .addItem(get(LifeGroveSpinner));
+            rooms.get(Prime1Rooms.TallonOverworld, Prime1Rooms.TallonEastOOB)
+                .addItem(get(LifeGroveSpinner)); //Obtainable oob
 
             //Tallon Item Location Requirements (NOT ROOM REQUIREMENTS)
             get(Alcove)

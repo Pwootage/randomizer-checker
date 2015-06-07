@@ -62,6 +62,9 @@ namespace randomizer_checker.data.prime1 {
         public const string LifeGrove = "Life Grove";
         public const string TransportTunnelE = "Transport Tunnel E";
         public const string TransporttoPhazonMinesEast = "Transport to Phazon Mines East";
+        public const string TallonSouthOOB = "Tallon South OOB";
+        public const string TallonWestOOB = "Tallon West OOB";
+        public const string TallonEastOOB = "Tallon East OOB";
 
         private Func<String, String, DoorType?> doorConverter;
         private Prime1Tricks tricks;
@@ -115,11 +118,13 @@ namespace randomizer_checker.data.prime1 {
             add(TallonOverworld, LifeGrove);
             add(TallonOverworld, TransportTunnelE);
             add(TallonOverworld, TransporttoPhazonMinesEast);
+            add(TallonOverworld, TallonSouthOOB);
+            add(TallonOverworld, TallonWestOOB);
+            add(TallonOverworld, TallonEastOOB);
 
             //Exits 
             //Tallon's Exits
             //Doors
-            //door(TallonOverworld, , , DoorType.BLUE);
             door(TallonOverworld, LandingSite, Gully, DoorType.BLUE, tricks.dash());
             door(TallonOverworld, LandingSite, Alcove, DoorType.BLUE, tricks.dash());
             door(TallonOverworld, LandingSite, TempleHall, DoorType.BLUE);
@@ -189,8 +194,8 @@ namespace randomizer_checker.data.prime1 {
             door(TallonOverworld, FrigateAccessTunnel, FrigateCrashSite, DoorType.ICE);
             door(TallonOverworld, FrigateAccessTunnel, MainVentalationShaftSectionC, DoorType.BLUE);
 
-            door(TallonOverworld, MainVentalationShaftSectionC, FrigateAccessTunnel, DoorType.BLUE);
-            door(TallonOverworld, MainVentalationShaftSectionC, MainVentalationShaftSectionB, DoorType.BLUE);
+            door(TallonOverworld, MainVentalationShaftSectionC, FrigateAccessTunnel, DoorType.BLUE, tricks.morphBallTunnel());
+            door(TallonOverworld, MainVentalationShaftSectionC, MainVentalationShaftSectionB, DoorType.BLUE, tricks.morphBallTunnel());
 
             door(TallonOverworld, MainVentalationShaftSectionB, MainVentalationShaftSectionC, DoorType.BLUE, tricks.wave());
             door(TallonOverworld, MainVentalationShaftSectionB, MainVentalationShaftSectionA, DoorType.BLUE, tricks.wave());
@@ -267,6 +272,36 @@ namespace randomizer_checker.data.prime1 {
             door(TallonOverworld, TransportTunnelD, TransporttoChozoRuinsSouth, DoorType.ICE);
 
             door(TallonOverworld, TransporttoChozoRuinsSouth, TransportTunnelD, DoorType.ICE);
+
+            //Tallon OOBs
+            get(TallonOverworld, GreatTreeChamber)
+                .addExit(new Exit(get(TallonOverworld, TallonSouthOOB), tricks.multiBombJump()));
+            get(TallonOverworld, MainVentalationShaftSectionB)
+                .addExit(new Exit(get(TallonOverworld, TallonEastOOB), tricks.multiBombJump()));
+            get(TallonOverworld, MainVentalationShaftSectionB)
+                .addExit(new Exit(get(TallonOverworld, TallonWestOOB), tricks.doubleBombJump(), tricks.invisiblePlatforms(), tricks.grappleBeam(), tricks.dash(), tricks.ghettoJump(), tricks.morphBallPuzzleBombs()));
+            get(TallonOverworld, MainVentalationShaftSectionB)
+                .addExit(new Exit(get(TallonOverworld, TallonWestOOB), tricks.doubleBombJump(), tricks.spaceJump(), tricks.invisiblePlatforms(), tricks.dashSJ(), tricks.ghettoSpaceJump(), tricks.morphBallPuzzleBombs()));
+
+            //Tallon OOB transitions of note
+            get(TallonOverworld, TallonSouthOOB)
+                .addExit(new Exit(get(TallonOverworld, LifeGrove)));
+            get(TallonOverworld, TallonSouthOOB)
+                .addExit(new Exit(get(TallonOverworld, GreatTreeHallUpper)));
+
+            get(TallonOverworld, TallonEastOOB)
+                .addExit(new Exit(get(TallonOverworld, FrigateCrashSite)));
+            get(TallonOverworld, TallonEastOOB)
+                .addExit(new Exit(get(TallonOverworld, TransporttoChozoRuinsEast)));
+            get(TallonOverworld, TallonEastOOB)
+                .addExit(new Exit(get(TallonOverworld, TallonWestOOB)));
+
+            get(TallonOverworld, TallonWestOOB)
+                .addExit(new Exit(get(TallonOverworld, LandingSite)));
+            get(TallonOverworld, TallonWestOOB)
+                .addExit(new Exit(get(TallonOverworld, ArborChamber)));
+            get(TallonOverworld, TallonWestOOB)
+                .addExit(new Exit(get(TallonOverworld, TallonEastOOB)));
         }
 
         public Room tallon(string name) {
