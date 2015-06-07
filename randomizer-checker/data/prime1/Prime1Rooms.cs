@@ -275,13 +275,15 @@ namespace randomizer_checker.data.prime1 {
 
             //Tallon OOBs
             get(TallonOverworld, GreatTreeChamber)
-                .addExit(new Exit(get(TallonOverworld, TallonSouthOOB), tricks.multiBombJump()));
+                .addExit(new Exit(get(TallonOverworld, TallonSouthOOB), tricks.multiBombJump()).setUrl("http://metroidspeed.wikia.com/wiki/Secret_World_39"));
+            get(TallonOverworld, MainVentalationShaftSectionA)
+                .addExit(new Exit(get(TallonOverworld, TallonEastOOB), tricks.multiBombJump()).setUrl("http://metroidspeed.wikia.com/wiki/Secret_World_13-15"));
             get(TallonOverworld, MainVentalationShaftSectionB)
-                .addExit(new Exit(get(TallonOverworld, TallonEastOOB), tricks.multiBombJump()));
-            get(TallonOverworld, MainVentalationShaftSectionB)
-                .addExit(new Exit(get(TallonOverworld, TallonWestOOB), tricks.doubleBombJump(), tricks.invisiblePlatforms(), tricks.grappleBeam(), tricks.dash(), tricks.ghettoJump(), tricks.morphBallPuzzleBombs()));
-            get(TallonOverworld, MainVentalationShaftSectionB)
-                .addExit(new Exit(get(TallonOverworld, TallonWestOOB), tricks.doubleBombJump(), tricks.spaceJump(), tricks.invisiblePlatforms(), tricks.dashSJ(), tricks.ghettoSpaceJump(), tricks.morphBallPuzzleBombs()));
+                .addExit(new Exit(get(TallonOverworld, TallonEastOOB), tricks.multiBombJump()).setUrl("http://metroidspeed.wikia.com/wiki/Secret_World_13-15"));
+            get(TallonOverworld, MainVentalationShaftSectionC)
+                .addExit(new Exit(get(TallonOverworld, TallonEastOOB), tricks.multiBombJump()).setUrl("http://metroidspeed.wikia.com/wiki/Secret_World_13-15"));
+            get(TallonOverworld, RootCave)
+                .addExit(new Exit(get(TallonOverworld, TallonWestOOB), tricks.spaceJump(), tricks.invisiblePlatforms(), tricks.ghettoSpaceJump(), tricks.morphBallPuzzleBombs()).setUrl("http://metroidspeed.wikia.com/wiki/Secret_World_26"));
 
             //Tallon OOB transitions of note
             get(TallonOverworld, TallonSouthOOB)

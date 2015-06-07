@@ -73,6 +73,7 @@ namespace randomizer_checker.model {
     class Exit {
         public Room dest;
         public List<Trick> tricks;
+        public string docUrl;
 
         public Exit(Room dest, params Trick[] tricks) {
             this.dest = dest;
@@ -88,6 +89,11 @@ namespace randomizer_checker.model {
 
         public override string ToString() {
             return "Exit[" + dest.name + ", [" + String.Join(",", tricks) + "]]";
+        }
+
+        public Exit setUrl(string url) {
+            this.docUrl = url;
+            return this;
         }
     }
 
